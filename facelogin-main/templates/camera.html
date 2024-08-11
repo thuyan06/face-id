@@ -1,0 +1,200 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    camera
+{% endblock %}
+
+{% block main %}
+{%if message == 1%}
+<H3 style="align-content: center;font-family: 'Roboto', sans-serif;position: absolute;border-radius: 0; left: 40%; top:0%;" class="alert-danger">NO such user<br></H3>
+{%endif%}
+{%if message == 2%}
+<H3 style="align-content: center;font-family: 'Roboto', sans-serif;position: absolute;border-radius: 0; left: 43%; top:0%;" class="alert-danger">Not clear<br></H3>
+{%endif%}
+
+{%if message == 3%}
+<H3 style="align-content: center;font-family: 'Roboto', sans-serif;position: absolute;border-radius: 0; left: 43%; top:0%;" class="alert-danger">Incorret face<br></H3>
+{%endif%}
+
+{%if message == 5%}
+<H3 style="align-content: center;font-family: 'Roboto', sans-serif;position: absolute;border-radius: 0; left: 43%; top:0%;" class="alert-danger">Not set face recogonition yet<br></H3>
+{%endif%}
+
+
+<div style="padding: 0px;margin: 0px;width:220;height:240;">
+
+<canvas 
+  style="position: absolute; left: 0%;z-index: -1; top:0%;height: 480px;width: 640px; border: 2px solid; border-radius: 50px; border-width: 5px; border-color: transparent;"
+  id="canvas" >
+</canvas>
+
+<button
+ id="stop" 
+ onclick="stop()" 
+ style="display:none">stop
+</button>
+
+<video id="player" style="position: sticky;height: 640;width: 480;z-index: -1; border: 2px solid; border-radius: 50px; border-width: 5px;"
+autoplay>
+</video>
+
+<br>
+
+<button class="button" onclick="capture()" id="capture" >
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff" fill-rule="evenodd" clip-rule="evenodd"><path d="m4 9c0-1.10457.89543-2 2-2h2l.44721-.89443c.33879-.67757 1.03131-1.10557 1.78889-1.10557h3.5278c.7576 0 1.4501.428 1.7889 1.10557l.4472.89443h2c1.1046 0 2 .89543 2 2v8c0 1.1046-.8954 2-2 2h-12c-1.10457 0-2-.8954-2-2z"></path><path d="m15 13c0 1.6569-1.3431 3-3 3s-3-1.3431-3-3 1.3431-3 3-3 3 1.3431 3 3z"></path></g></svg>
+  <span class="lable">Take a Photo</span>
+</button>
+
+<form action="/facereg" method="post"  enctype="multipart/form-data" >
+<input 
+type="text" 
+required="true" 
+placeholder ="Username"
+class="form-control"
+id="name"
+name="name"
+autocomplete="off"
+style="align-content: center;width:20%;border-radius: 100px; left: 40%; top:49%;display: none;">
+<br>
+
+<input 
+type="text" 
+id="pic" name="pic" 
+style="display:none ">
+
+  
+
+<button id="scan"
+ style="align-content: center; border-radius: 100px;display: none; left: 57%; top:49%;"
+ class="btn btn-primary retry">
+  scan
+</button>
+
+
+
+
+ <button onclick="delayedReload()" class="retry">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-arrow-repeat"
+    viewBox="0 0 16 16"
+  >
+    <path
+      d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"
+    ></path>
+    <path
+      fill-rule="evenodd"
+      d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"
+    ></path>
+  </svg>
+  Retry
+</button>
+
+
+</form>
+
+</div>
+
+<button id="instructionsButton" class="anleitung-button noselect">Anleitung</button>
+
+<div id="instructionsModal" style="display:none; position: absolute; top: 62%; left: 15%; width: 70%; padding: 20px; background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <h2>Loginsanleitung</h2>
+    <p>Folgen Sie diesen Schritten, um sich einzuloggen:</p>
+    <ol style="padding-left: 20px; text-align: left;">
+        <li>Positionieren Sie sich vor der Kamera.</li>
+        <li>Klicken Sie auf den "Take a Photo" Button, um Ihr Gesicht aufzunehmen. Achten Sie dabei darauf, dass Sie  alleine auf dem Bild zusehen sind und dass Sie Ihren Kopf still halten.</li>
+        <li>Nach der Aufnahme erscheint der "Scan" Button. Klicken Sie darauf nachdem Sie Ihren Nutzernamen angegeben haben, um sich einzuloggen.</li>
+        <li>Sollte das System Sie nicht erkennen wiederholen Sie den Vorgang.</li>
+    </ol>
+    <button onclick="toggleInstructions()" style="margin-top: 20px;" class="btn btn-primary">Schliessen</button>
+</div>
+<script>
+  const player = document.getElementById('player');
+  const canvas = document.getElementById('canvas');
+  const context = canvas.getContext('2d');
+  const captureButton = document.getElementById('capture');
+  const scan = document.getElementById('scan');
+  const img = document.getElementById('pic');
+  const name = document.getElementById('name');
+
+  const vgaconstraints = {
+  video: {width: {exact: 720}, height: {exact: 480}},
+  };
+
+  function toggleInstructions() {
+    instructionsModal.style.display = (instructionsModal.style.display === "none" ? "block" : "none");
+  }
+
+  instructionsButton.onclick = toggleInstructions;
+
+  function capture(){
+  canvas.style.position="relative";
+  canvas.style.left="0%";
+  canvas.style.top="0%";
+  canvas.style.width = "720px";
+  canvas.style.height = "480px"
+  	
+  	
+
+    context.drawImage(player, 0, 0, canvas.width, canvas.height);
+    player.style.display="none";
+    captureButton.style.display="none";
+    scan.style.display="block";
+    name.style.display="block";
+
+    cap = canvas.toDataURL('image/png').split(",")[1];
+    img.value=cap;
+    
+  }
+
+function stop(){
+  player.srcObject.getVideoTracks().forEach(track => track.stop());
+}
+
+
+
+  navigator.mediaDevices.getUserMedia(vgaconstraints)
+    .then((stream) => {
+      // Attach the video stream to the video element and autoplay.
+      player.srcObject = stream;
+    });
+
+    document.querySelector('form').onsubmit = function(event) {
+    event.preventDefault();
+
+    fetch('/facereg', {
+        method: 'POST',
+        body: new FormData(this)
+    }).then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              const audio = new Audio('/voices/voice2.mp3'); // Path to your audio file
+              audio.play();
+              audio.onended = function() {
+                  window.location.href = "/home"; // Redirect when audio ends
+              };
+          } else {
+              // Handle errors or unsuccessful login attempts
+              alert("Face recognition failed, please try again.");
+          }
+      })
+      .catch(error => {
+          console.error('Error during login:', error);
+      });
+};
+
+function delayedReload() {
+    setTimeout(function() {
+        location.reload();
+    }, 500); 
+}
+</script>
+ 
+
+
+
+</html>
+{% endblock %}

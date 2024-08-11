@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block main %}
+<body> 
+ <h1>Welcome, {{ username }}!</h1>
+ <p>Testing face recognition and login system.</p>
+ <div id="calendar" class="noselect"></div>
+ <div id="taskModal" class="modal" class="card">
+  <div class="modal-content" class="card2" style="max-width: 475px;">
+      <span class="close">&times;</span>
+      <form id="taskForm" class="form" style="justify-content: center!important; ">
+        <input type="hidden" id="taskId" name="task_id">
+          <input type="text" id="taskTitle" name="title" required class="input-field field" placeholder="Title">
+          <textarea id="taskDescription" name="description" required class="input-field field" placeholder="Description" style="min-height: 75px; max-height: 800px;"></textarea>
+          <label for="taskColor">Color:</label>
+          <input type="color" id="taskColor" name="color" value="#3788d8">
+          <input type="hidden" id="taskDate" name="due_date">
+          <button type="submit" class="button1" style="max-width: 100px;">Safe</button>
+          <button type="button" id="deleteButton" onclick="deleteTask(calendar)" class="button1" style="max-width: 100px;">Delete</button>
+      </form>
+  </div>
+</div>
+ <link href='https://cdn.jsdelivr.net/npm/fullcalendar@latest/main.min.css' rel='stylesheet' />
+ <script src='https://cdn.jsdelivr.net/npm/fullcalendar@latest/main.min.js'></script>
+ <script src="static/calender.js"></script>
+</body>
+{% endblock %}

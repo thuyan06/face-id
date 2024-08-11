@@ -1,0 +1,275 @@
+body {
+    background: #e4e4e4!important;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    background-color: #ffffff; /* Changed to white */
+    border-radius: 25px;
+    transition: 0.4s ease-in-out;
+    border-color: white;
+  }
+  
+  .card {
+    
+    border-radius: 22px;
+    transition: ease-out 1s ;
+    border-color: white;
+    border-width: 3px;
+  }
+  
+  .card2 {
+    border-radius: 0;
+    transition: all 0.2s;
+  }
+  
+  .card2:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
+  }
+  
+  .card:hover {
+    background-image: linear-gradient(163deg, white 0%, black);
+    box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.3);
+  }
+  
+  #heading {
+    text-align: center;
+    margin: 2em;
+    color: #000000; /* Changed to black for better visibility on white */
+    font-size: 1.2em;
+  }
+
+
+  .form-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: black!important;
+    background-color: #ffffff!important;
+    box-shadow: inset 2px 5px 10px rgb(230, 230, 230);
+  }
+  
+  .field{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: black; /* Changed to black for visibility */
+    background-color: #ffffff; /* Changed to white */
+    box-shadow: inset 2px 5px 10px rgb(230, 230, 230); /* Lighter shadow for white background */
+  }
+  
+  .input-icon{
+    height: 1.3em;
+    width: 1.3em;
+    fill: black; /* Changed to black for visibility */
+  }
+  
+  .input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #000000; /* Changed to black for readability */
+  }
+  
+  .form .btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 2.5em;
+  }
+  
+  .button1 {
+    padding: 0.5em;
+    padding-left: 1.1em;
+    padding-right: 1.1em;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    border: none;
+    outline: none;
+    transition: 0.4s ease-in-out;
+    background-color: rgba(196, 196, 196, 0.25); /* Changed to white */
+    color: black; /* Changed to black for visibility */
+  }
+  
+  .button1:hover {
+    background-color: rgba(124, 124, 124, 0.25); /* Light hover effect */
+    color: black;
+  }
+  
+  .button2 {
+    padding: 0.5em;
+    padding-left: 2.3em;
+    padding-right: 2.3em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: 0.4s ease-in-out;
+    background-color: rgba(196, 196, 196, 0.25); /* Changed to white */
+    color: black; /* Changed to black for visibility */
+  }
+  
+  .button2:hover {
+    background-color: rgba(124, 124, 124, 0.25); /* Light hover effect */
+    color: black;
+  }
+  
+  .button3 {
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: 0.4s ease-in-out;
+    background-color: rgba(196, 196, 196, 0.25); /* Kept as red for distinction */
+    color: black;
+  }
+  
+  .button3:hover {
+    background-color: rgba(255, 0, 0, 0.856);
+    color: white;
+  }
+
+  .fc-daygrid-day {
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+.fc-daygrid-day-number {
+    color: #333;
+}
+.fc-event {
+    font-size: 0.85em;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border-radius: 30px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+    color: #aaa;
+    transition: 0.5s;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.anleitung-button {
+  outline: none !important;
+  border: none;
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 17px;
+  padding: 12px 20px;
+  color: black;
+  background-color: rgba(196, 196, 196, 0.25);
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em rgba(59, 48, 78, 0.527);
+  letter-spacing: 0.05em;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.5s;
+}
+
+.anleitung-button svg {
+  margin-right: 8px;
+  width: 25px;
+}
+
+.anleitung-button:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em rgba(88, 71, 116, 0.627);
+}
+
+.anleitung-button:active {
+  box-shadow: 0 0.3em 1em -0.5em rgba(88, 71, 116, 0.627);
+}
+
+.anleitung-button::before {
+  content: "";
+  width: 4px;
+  height: 40%;
+  background-color: black;
+  position: absolute;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  left: 0;
+  transition: all 0.2s;
+}
+
+.anleitung-button::after {
+  content: "";
+  width: 4px;
+  height: 40%;
+  background-color: black;
+  position: absolute;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  right: 0;
+  transition: all 0.2s;
+}
+
+.anleitung-button:hover::before,
+.anleitung-button:hover::after {
+  height: 60%;
+}
+
+.retry {
+  color: black;
+  background-color: #d7d7d7;
+}
+
+.retry:hover {
+  background-color: #c8c8c8;
+  color: black;
+}
+
+.retry svg {
+  display: inline;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-right: 0.75rem;
+  color: black;
+}
